@@ -2,8 +2,8 @@
   "schema": 1,
   "courseId": 2084,
   "repository": "LearningOS/2026a-rustling-dr3334",
-  "commit": "bb21099ac202ed85250d5ec18493543b77cf3358",
-  "score": 33,
+  "commit": "0c0ec818fc43f9591f5eba3ad36e83dd9ddc95f6",
+  "score": 35,
   "totalScore": 110,
   "exercises": [
     {
@@ -240,16 +240,16 @@
     {
       "name": "enums1",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "enums2",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "enums3",
@@ -778,9 +778,9 @@
     }
   ],
   "student": "dr3334",
-  "runId": "38200858595",
+  "runId": "38209412079",
   "runAttempt": "1",
   "upload": {
-    "status": "accepted"
+    "status": "pending"
   }
 }
