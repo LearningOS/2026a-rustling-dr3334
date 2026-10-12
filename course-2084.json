@@ -2,8 +2,8 @@
   "schema": 1,
   "courseId": 2084,
   "repository": "LearningOS/2026a-rustling-dr3334",
-  "commit": "f6f2d9fc12979c35f14027d1ed9bcfef6fc686fd",
-  "score": 68,
+  "commit": "7a164c3b6773745c6a9a57320564f52a7e796990",
+  "score": 70,
   "totalScore": 110,
   "exercises": [
     {
@@ -485,9 +485,9 @@
     {
       "name": "tests2",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "tests3",
@@ -499,9 +499,9 @@
     {
       "name": "tests4",
       "max": 1,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 1
+      "score": 1,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "iterators1",
@@ -778,9 +778,9 @@
     }
   ],
   "student": "dr3334",
-  "runId": "38253673372",
+  "runId": "38254585891",
   "runAttempt": "1",
   "upload": {
-    "status": "accepted"
+    "status": "pending"
   }
 }
