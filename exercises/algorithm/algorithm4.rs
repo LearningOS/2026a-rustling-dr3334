@@ -66,7 +66,7 @@ where
 {
     // Insert a node into the tree
     fn insert(&mut self, value: T) {
-        //TODO
+        self
     }
 }
 
