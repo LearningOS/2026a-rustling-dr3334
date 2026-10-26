@@ -47,10 +47,11 @@ where
         let mut idx = self.count;  // ④ 游标 = 新元素位置
         while idx > 1 && cmp(&self.items[idx], &self.items[self.parent_idx(idx)]) {
           // ⑤ 我比父节点"优" → 和父交换
-          self.items.swap(idx, self.parent_idx(idx));
+          let parent = self.parent_idx(idx);   // ① 先算：返回 usize（值），&self 租约立即结束
+            self.items.swap(idx, parent);        // ② 后写：此刻场上没有任何其他借用，独占合法
           idx = self.parent_idx(idx);   // ⑥ 游标跟上去
     }
-
+    }
     fn parent_idx(&self, idx: usize) -> usize {
         idx / 2
     }
@@ -69,9 +70,9 @@ where
 
     fn smallest_child_idx(&self, idx: usize) -> usize {
         //TODO
-		let left=left_child_idx(&self, idx);
-		let right=right_child_idx(&self, idx);
-        if right<self.count  {
+		let left=self.left_child_idx( idx);
+		let right=self.right_child_idx( idx);
+        if right<=self.count  {
             if (self.comparator)(&self.items[left], &self.items[right]) {
               left                               // 左比右"优" → 选左
           } else {
