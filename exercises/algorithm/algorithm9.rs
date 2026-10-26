@@ -2,10 +2,12 @@
 	heap
 	This question requires you to implement a binary heap function
 */
-// I AM NOT DONE
+
 
 use std::cmp::Ord;
 use std::default::Default;
+use std::fmt::Alignment::Right;
+use std::thread::sleep;
 
 pub struct Heap<T>
 where
@@ -38,6 +40,15 @@ where
 
     pub fn add(&mut self, value: T) {
         //TODO
+        self.items.push(value);
+
+        self.count+=1;
+        let cmp = self.comparator; // ③ 复制 fn 指针出来，避免借用打架
+        let mut idx = self.count;  // ④ 游标 = 新元素位置
+        while idx > 1 && cmp(&self.items[idx], &self.items[self.parent_idx(idx)]) {
+          // ⑤ 我比父节点"优" → 和父交换
+          self.items.swap(idx, self.parent_idx(idx));
+          idx = self.parent_idx(idx);   // ⑥ 游标跟上去
     }
 
     fn parent_idx(&self, idx: usize) -> usize {
@@ -58,7 +69,18 @@ where
 
     fn smallest_child_idx(&self, idx: usize) -> usize {
         //TODO
-		0
+		let left=left_child_idx(&self, idx);
+		let right=right_child_idx(&self, idx);
+        if right<self.count  {
+            if (self.comparator)(&self.items[left], &self.items[right]) {
+              left                               // 左比右"优" → 选左
+          } else {
+              right                              // 否则选右
+          }
+        }
+        else {
+            return  left;
+        }
     }
 }
 
@@ -84,9 +106,29 @@ where
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
-        //TODO
-		None
-    }
+      if self.count == 0 {              // ① 空堆：测试第一行就是 next() on 空堆，必须 None
+          return None;
+      }
+
+      // ② 金蝉脱壳：末尾元素顶上 1 号位，原堆顶被挤到末尾
+      self.items.swap(1, self.count);
+      self.count -= 1;
+      let result = self.items.pop();    // ③ 挤出来的就是原堆顶 → 返回值到手
+
+      // ④ 下沉：顶上来的新 1 号通常压不住场子
+      let cmp = self.comparator;        // 老朋友：先复制 fn 指针防借用冲突
+      let mut idx = 1;
+      while self.children_present(idx) {
+          let child = self.smallest_child_idx(idx);     // 选最优孩子
+          if cmp(&self.items[child], &self.items[idx]) {
+              self.items.swap(idx, child);              // 孩子更优 → 换位
+              idx = child;                              // 游标跟下去
+          } else {
+              break;                                    // 当前节点坐稳了，提前收工
+          }
+      }
+      result
+  }
 }
 
 pub struct MinHeap;
